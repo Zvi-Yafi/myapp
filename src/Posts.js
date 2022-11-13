@@ -1,44 +1,48 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import Accordion from "react-bootstrap/Accordion";
+import {  Outlet, useNavigate } from "react-router-dom";
+import { getpost } from "./GetUsers";
 
-const Posts = () => {
-  const user = JSON.parse(localStorage.getItem("posts"));
-  const [hide, setHide] = useState(false);
-  console.log(hide);
-  console.log(user);
+function Posts() {
+  const [posts, setPosts] = useState(null);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const userid = JSON.parse(localStorage.getItem("user")).id;
+    getpost(userid).then((u) => setPosts(u));
+  }, []);
   return (
-    <div>
-      {user.map((item, idx) => (
-        <div className="accordion accordion-flush" id="accordionFlushExample">
-          <div className="accordion-item">
-            <h2 className="accordion-header" id="flush-headingOne">
-              <button
-                className="accordion-button collapsed"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#flush-collapseOne"
-                aria-expanded="false"
-                aria-controls="flush-collapseOne"
-                onClick={() => {
-                  setHide(!hide);
-                }}
-              >
-                {item.title}
-              </button>
-            </h2>
-            <div
-              id="flush-collapseOne"
-              className={hide ? "accordion-button collapsed" : "collapse"}
-              aria-labelledby="flush-headingOne"
-              data-bs-parent="#accordionFlushExample"
-            >
-              <div className="accordion-body">{item.body}</div>
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
+    <>
+      {!posts ? (
+       <div class="text-center">
+       <div class="spinner-border" role="status">
+         <span class="visually-hidden">Loading...</span>
+       </div>
+     </div>
+      ) : (
+        posts.map((item, idx) => (
+          <Accordion key={idx}>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>{item.title}</Accordion.Header>
+              <Accordion.Body>
+                {item.body}
+                <Button
+                  variant="outline-info"
+                  style={{float:'right'}}
+                  onClick={() => {
+                    navigate(`${item.id}`);
+                  }}
+                >
+                 show post
+                </Button>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
+        ))
+      )}
+      <Outlet />
+    </>
   );
-};
-
+}
 export default Posts;

@@ -8,23 +8,25 @@ const Login = () => {
   const [pass, setPass] = useState("");
 
   const ConfirmUser = () => {
-
-
     getUser(nameUser, pass).then((user) => {
       if (user) {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("nameUser", nameUser);
         localStorage.setItem("passUser", pass);
-        navigete("/deshbord");
+        navigete("/home");
       } else {
         setNameUser("");
         setPass("");
-        navigete("/login");
+        navigete("/home/login");
       }
     });
   };
   return (
     <>
+    <div style={{
+      border:'2px solid lightgrey',
+      height:'300px'
+      }}>
       <form>
         <div className="mb-3 mt-3">
           <label className="form-label">nameUser:</label>
@@ -58,6 +60,7 @@ const Login = () => {
           Submit
         </button>
       </form>
+      </div>
     </>
   );
 };

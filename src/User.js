@@ -2,10 +2,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 
 const User = () => {
-const param = useParams()
-console.log(param);
+const par = useParams()
+
+console.log(par);
   return (
-    <h1>user{param.userId}</h1>
+    <h1>user{}</h1>
   )
 }
 

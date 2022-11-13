@@ -1,72 +1,31 @@
-import { Navigate, NavLink, Outlet, useNavigate } from "react-router-dom";
-function Home() {
-    const navigate = useNavigate();
+import React from "react";
+import { Navbar } from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
 
-  let user = JSON.parse(localStorage.getItem("user"));
+import { Outlet} from "react-router-dom";
+
+const Deshbord = () => {
  
   return (
     <>
-     <h1
-        style={{
-          width: "100%",
-          backgroundColor: "lightblue",
-          fontSize: "30px",
-          textAlign: "center",
-        }}
-      >
-        {user?`welcome:${user.username}`:'!אנא הרשם וזריז'}
-         <button
-          className="btn"
-          style={{ float: "left" }}
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          Login
-        </button>
-      </h1>
-    
-      
-        
-      <div style={{ background: "lightgray", textAlign: "center" }}>
-        {/* <NavLink
-        to={"users"}
-        style={({isActive})=> {
-          return{ textDecoration:'none',
-          color:isActive ?'red':'blue',
-          padding: "20px",
-          fontSize: "30px",}
-        }}
-      >
-        component Users
-      </NavLink>
-      <NavLink
-        to={"about"}
-        style={({isActive})=> {
-          return{ textDecoration:'none',
-          color:isActive ?'red':'blue',
-          padding: "20px",
-          fontSize: "30px",}
-        }}
-      >
-        go to about
-      </NavLink>
-      <NavLink
-        to={"data"}
-        style={({isActive})=> {
-          return{ textDecoration:'none',
-          color:isActive ?'red':'blue',
-          padding: "20px",
-          fontSize: "30px",}
-        }}
-      >
-        go to data
-      </NavLink> */}
-      </div>
+ <Navbar bg="primary" variant="dark">
+          <Nav className="me-auto">
+            <Nav.Link style={{margin:'15px'}}  href="/home/info">Info</Nav.Link>
+            <Nav.Link style={{margin:'15px'}} href="/home/Todos">Todos</Nav.Link>
+            <Nav.Link style={{margin:'15px'}} href="/home/Posts">Posts</Nav.Link>
+             <Nav.Link style={{margin:'15px'}}  href="/home/Alboms">Alboms</Nav.Link>
+              <Nav.Link onClick={()=>{
+               const remove = () => {
+                localStorage.removeItem("user");
+              };
+              remove()
+            }} style={{margin:'15px'}}  href="/home/login">Logout</Nav.Link>
+          </Nav>
+      </Navbar>
       <Outlet />
-     
     </>
   );
-}
+};
 
-export default Home;
+export default Deshbord;
+
