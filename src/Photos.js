@@ -4,26 +4,31 @@ import Card from "react-bootstrap/Card";
 
 const Photos = () => {
   const [img, setImg] = useState(0);
-  const { photoID } = useParams();
+  const url = window.location.href.split('/')[5]
+  console.log(url);
 
   const [photo, setPhoto] = useState(null);
   console.log(img);
 
   async function getPhoto() {
     const res = await fetch(
-      `https://jsonplaceholder.typicode.com/albums/${photoID}/photos`
+      `http://localhost:5003/albums/${url}/photos`
     );
     const data = await res.json();
+    console.log(data);
     setPhoto(data);
   }
+
   useEffect(() => {
     getPhoto();
   }, []);
+
   const dafdef = (num) => {
     if (img + num * 1 >= 0 && img + num * 1 <= 50) {
       setImg(img + num * 5);
     }
   };
+
   return (
     <div style={{ textAlign: "center" }}>
       <div>
@@ -40,15 +45,16 @@ const Photos = () => {
         </button>
       </div>
       {!photo ? (
-        <div class="text-center">
-          <div class="spinner-border" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div className="text-center">
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
           </div>
         </div>
       ) : (
         photo.slice(img).map((item, idx) =>
           idx <= 10 ? (
-            <Card
+            <Card 
+            key={idx}
               style={{
                 width: "18rem",
                 display: "inline-block",

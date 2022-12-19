@@ -6,13 +6,14 @@ const Post = () => {
   const [data, setData] = useState();
   const [hide, setHide] = useState(true);
 
+  const url = window.location.href.split('/')[5]
+  console.log(url);
+  
   const navigate = useNavigate();
-
-  let { postID } = useParams();
 
   async function getPost() {
     const res = await fetch(
-      `https://jsonplaceholder.typicode.com/posts/${postID}`
+      `https://jsonplaceholder.typicode.com/posts/${url}`
     );
     const data = await res.json();
     setData(data);

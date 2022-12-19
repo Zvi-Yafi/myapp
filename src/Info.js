@@ -4,6 +4,7 @@ import getUser from "./GetUsers";
 const Info = () => {
   const [user, setUser] = useState(null);
   console.log(user);
+
   useEffect(() => {
     const userName = localStorage.getItem("nameUser");
     const pass = localStorage.getItem("passUser");
@@ -31,14 +32,10 @@ const Info = () => {
          </Card.Text>
        </Card.Body>
        <ListGroup className="list-group-flush" >
-         <ListGroup.Item >email: {user.phone}</ListGroup.Item>
-         <ListGroup.Item>username: {user.username} </ListGroup.Item>
-         <ListGroup.Item>address:
-          <ListGroup.Item>city:  {user.address.city} </ListGroup.Item>
-          <ListGroup.Item>street: {user.address.street} </ListGroup.Item>
-           </ListGroup.Item>
-           <ListGroup.Item>website: {user.website} </ListGroup.Item>
-
+         <ListGroup.Item >userName: {user.userName}</ListGroup.Item>
+         <ListGroup.Item>userID: {user.userID} </ListGroup.Item>
+         <ListGroup.Item>address:  {user.address} </ListGroup.Item>
+         
        </ListGroup>
     
      </Card>

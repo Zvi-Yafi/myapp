@@ -6,7 +6,8 @@ const Todos = () => {
   const [sortBy, setSortBy] = useState("");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user")).id;
+    const user = JSON.parse(localStorage.getItem("user")).userID;
+    console.log(user);
     gettodo(user).then((t) => setTodos(t));
   }, []);
 

@@ -1,6 +1,11 @@
+// async function getUsers() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/users");
+//   const data = await res.json();
+//   return data;
+// }
 
-async function getUsers() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+async function getUsersfromsql() {
+  const res = await fetch(`http://localhost:5003/users`);
   const data = await res.json();
   return data;
 }
@@ -8,22 +13,25 @@ async function getUsers() {
 async function getUser(userName, pass) {
   let user;
 
-  return await getUsers().then((users) => {
+  return await getUsersfromsql().then((users) => {
     user = users.find(
       (user) =>
-        user.username === userName && pass === user.address.geo.lat.slice(-4)
+        user.userName == userName && pass == user.password
     );
     if (user) {
       console.log("secses");
       return user;
-    } else( 
-alert('משתמש לא נמצא אנא נסה שוב')
-      )
+    } else alert("משתמש לא נמצא אנא נסה שוב");
   });
 }
 
-async function getTodos() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+// async function getTodos() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+//   const data = await res.json();
+//   return data;
+// }
+async function getTodosfromsql() {
+  const res = await fetch("http://localhost:5003/todos");
   const data = await res.json();
   return data;
 }
@@ -31,7 +39,7 @@ async function getTodos() {
 function gettodo(userid) {
   let user;
 
-  return getTodos().then((users) => {
+  return  getTodosfromsql().then((users) => {
     user = users.filter((user) => user.userId === userid);
     if (user) {
       localStorage.setItem("todos", JSON.stringify(user));
@@ -42,18 +50,23 @@ function gettodo(userid) {
   });
 }
 
-async function getPosts() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+// async function getPosts() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+//   const data = await res.json();
+//   return data;
+// }
+
+async function getPostsfromsql() {
+  const res = await fetch("http://localhost:5003/posts");
   const data = await res.json();
   return data;
 }
 
 function getpost(userid) {
   let user;
-  return getPosts().then((users) => {
-    user = users.filter((user) => user.userId === userid);
+  return getPostsfromsql().then((users) => {
+    user = users.filter((user) => user.userID === userid);
     if (user) {
-      // console.log(user);
       return user;
     } else {
       alert("דחילק");
@@ -63,16 +76,21 @@ function getpost(userid) {
 
 
 
-async function getAlboms() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/albums");
+// async function getAlboms() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/albums");
+//   const data = await res.json();
+//   return data;
+// }
+async function getAlbomsfromsql() {
+  const res = await fetch("http://localhost:5003/alboms");
   const data = await res.json();
   return data;
 }
 
 function getAlbom(userid) {
   let user;
-  return getAlboms().then((users) => {
-    user = users.filter((user) => user.userId === userid);
+  return getAlbomsfromsql().then((users) => {
+    user = users.filter((user) => user.userID === userid);
     if (user) {
       // console.log(user);
       return user;
@@ -82,17 +100,22 @@ function getAlbom(userid) {
   });
 }
 
+// async function getPhotos() {
+//   const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+//   const data = await res.json();
+//   return data;
+// }
 
-async function getPhotos() {
-  const res = await fetch("https://jsonplaceholder.typicode.com/photos");
+async function getPhotosfromsql() {
+  const res = await fetch("http://localhost:5003/photos");
   const data = await res.json();
   return data;
 }
 
 function getPhoto(userid) {
   let user;
-  return getPhotos().then((users) => {
-    user = users.filter((user) => user.userId === userid);
+  return getPhotosfromsql().then((users) => {
+    user = users.filter((user) => user.userID === userid);
     if (user) {
       // console.log(user);
       return user;
@@ -102,8 +125,8 @@ function getPhoto(userid) {
   });
 }
 
-export {getPhoto}
-export {getAlbom}
+export { getPhoto };
+export { getAlbom };
 export { getpost };
 export { gettodo };
-export default  getUser ;
+export default getUser;

@@ -64,7 +64,7 @@ function Home() {
             <Avatar {...stringAvatar(user.name)} />
           </Stack>
         )}
-        {user ? `welcome:${user.username}` : "!אנא הרשם בבקשה"}
+        {user ? `welcome:${user.userName}` : "!אנא הרשם בבקשה"}
       </h1>
       <Outlet />
     </>

@@ -7,9 +7,9 @@ import { Outlet} from "react-router-dom";
 const Deshbord = () => {
  
   return (
-    <>
- <Navbar bg="primary" variant="dark">
-          <Nav className="me-auto">
+   <div style={{textAlign:'center'}}>
+ <Navbar bg="primary" variant="dark" >
+          <Nav className="me-auto" >
             <Nav.Link style={{margin:'15px'}}  href="/home/info">Info</Nav.Link>
             <Nav.Link style={{margin:'15px'}} href="/home/Todos">Todos</Nav.Link>
             <Nav.Link style={{margin:'15px'}} href="/home/Posts">Posts</Nav.Link>
@@ -23,7 +23,7 @@ const Deshbord = () => {
           </Nav>
       </Navbar>
       <Outlet />
-    </>
+   </div>
   );
 };
 

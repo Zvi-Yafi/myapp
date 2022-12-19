@@ -8,7 +8,7 @@ const Albums = () => {
   const [alboms, setAlboms] = useState(null);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user")).id;
+    const user = JSON.parse(localStorage.getItem("user")).userID;
     getAlbom(user).then((t) => setAlboms(t));
   }, []);
 
